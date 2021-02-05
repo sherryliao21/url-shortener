@@ -6,12 +6,11 @@
   </div>
   <div class="fresh-result">
 
-    <h1 style="color:red;">{{ freshResult.originalURL }}</h1>
-    <h2 style="color:red;">{{ freshResult.shortenedURL }}</h2>
-
-    <h1>我現在拿不到我剛生好的結果QQ</h1>
+    <h1 style="color:red;">原網址：{{ freshResult.originalURL }}</h1>
+    <h2 style="color:red;">新網址：{{ freshResult.shortenedURL }}</h2>
   </div>
-  <div class="originalURL">
+  <div class="originalURL" style="background-color: sandybrown;">
+    <h1>歷史紀錄：</h1>
     {{#each history}}
     <h2>{{ this.originalURL }}</h2>
     <h2>http://localhost:3000/{{ this.shortenedURL }}</h2>

@@ -35,10 +35,21 @@ app.get('/result', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/:shortURL', (req, res) => {
+  const currentShortURL = `http://localhost:3000/${req.params.shortURL}`
+  console.log(currentShortURL)
+  return URL.find({ shortenedURL: currentShortURL })
+    .lean()
+    .then(target => {
+      res.redirect(target[0].originalURL)
+    })
+    .catch(error => console.log(error))
+})
+
 app.post('/', (req, res) => {
   const shortenedURL = `http://localhost:3000/${generateShortenedURL()}`
   const originalURL = req.body.link
-  function generateShortenedURL() { // 記得把生成短網址亂碼的函式完成
+  function generateShortenedURL() { // 如何防止重複?
     let shortURL = ''
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     for (let i = 0; i < 5; i++) {
