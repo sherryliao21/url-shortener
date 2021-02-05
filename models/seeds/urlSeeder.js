@@ -12,7 +12,7 @@ db.on('error', () => {
 db.once('open', () => {
   examples.forEach(example => {
     URL.create({
-      targetURL: example.targetURL,
+      originalURL: example.originalURL,
       shortenedURL: example.shortenedURL
     })
   })

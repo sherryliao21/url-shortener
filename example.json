@@ -1,10 +1,10 @@
 [
   {
-    "targetURL": "http://www.google.com",
+    "originalURL": "http://www.google.com",
     "shortenedURL": "JMs287"
   },
   {
-    "targetURL": "http://www.yahoo.com",
+    "originalURL": "http://www.yahoo.com",
     "shortenedURL": "a9C2j4"
   }
 ]

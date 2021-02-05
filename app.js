@@ -25,19 +25,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/result', (req, res) => {
-  res.render('result')
+  res.render('result', { originalURL, shortenedURL }) // 用樣板引擎去帶入原本的網址+生好的網址 看能否順便取得favicon來display
 })
 
 app.post('/', (req, res) => {
   const shortenedURL = generateShortenedURL()
-  const targetURL = req.body.link
+  const originalURL = req.body.link
   console.log(req.body)
   console.log(shortenedURL)
-  function generateShortenedURL() {
+  function generateShortenedURL() { // 記得把生成短網址亂碼的函式完成
     let shortURL = '87jwB'
     return shortURL
   }
-  return URL.create({ targetURL, shortenedURL })
+  return URL.create({ originalURL, shortenedURL })
     .then(() => res.redirect('result'))
     .catch(error => console.log(error))
 })
