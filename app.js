@@ -30,24 +30,25 @@ app.get('/result', (req, res) => {
     .lean()
     .then(history => {
       const freshResult = history[0]
-      console.log(freshResult.originalURL)
       res.render('result', { history, freshResult })
-    }) // 看能否順便取得favicon來display
+    })
     .catch(error => console.log(error))
-
 })
 
 app.post('/', (req, res) => {
-  const shortenedURL = generateShortenedURL()
+  const shortenedURL = `http://localhost:3000/${generateShortenedURL()}`
   const originalURL = req.body.link
-  console.log(req.body)
-  console.log(shortenedURL)
   function generateShortenedURL() { // 記得把生成短網址亂碼的函式完成
-    let shortURL = '87jwB'
+    let shortURL = ''
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    for (let i = 0; i < 5; i++) {
+      const letterIndex = Math.floor(Math.random() * letters.length)
+      shortURL += letters[letterIndex]
+    }
     return shortURL
   }
   return URL.create({ originalURL, shortenedURL })
-    .then(res.redirect('result')) // 如何存完馬上把資料拿出來display?
+    .then(res.redirect('result'))
     .catch(error => console.log(error))
 })
 
