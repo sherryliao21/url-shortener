@@ -25,7 +25,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/result', (req, res) => {
-  res.render('result', { originalURL, shortenedURL }) // 用樣板引擎去帶入原本的網址+生好的網址 看能否順便取得favicon來display
+  return URL.find()
+    .sort({ _id: 'desc' })
+    .lean()
+    .then(history => {
+      const freshResult = history[0]
+      console.log(freshResult.originalURL)
+      res.render('result', { history, freshResult })
+    }) // 看能否順便取得favicon來display
+    .catch(error => console.log(error))
+
 })
 
 app.post('/', (req, res) => {
@@ -38,7 +47,7 @@ app.post('/', (req, res) => {
     return shortURL
   }
   return URL.create({ originalURL, shortenedURL })
-    .then(() => res.redirect('result'))
+    .then(res.redirect('result')) // 如何存完馬上把資料拿出來display?
     .catch(error => console.log(error))
 })
 

@@ -1,3 +1,20 @@
-<h1>this is result page</h1>
-我要有生成後的短網址
-還有資料庫中的資料作為history可以display
+<div class="container">
+  <div>
+    <h1>this is result page</h1>
+    我要有生成後的短網址
+    還有資料庫中的資料作為history可以display
+  </div>
+  <div class="fresh-result">
+
+    <h1 style="color:red;">{{ freshResult.originalURL }}</h1>
+    <h2 style="color:red;">http://localhost:3000/{{ freshResult.shortenedURL }}</h2>
+
+    <h1>我現在拿不到我剛生好的結果QQ</h1>
+  </div>
+  <div class="originalURL">
+    {{#each history}}
+    <h2>{{ this.originalURL }}</h2>
+    <h2>http://localhost:3000/{{ this.shortenedURL }}</h2>
+    {{/each}}
+  </div>
+</div>
