@@ -37,7 +37,6 @@ app.get('/result', (req, res) => {
 
 app.get('/:shortURL', (req, res) => {
   const currentShortURL = `http://localhost:3000/${req.params.shortURL}`
-  console.log(currentShortURL)
   return URL.find({ shortenedURL: currentShortURL })
     .lean()
     .then(target => {
@@ -47,20 +46,37 @@ app.get('/:shortURL', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  const shortenedURL = `http://localhost:3000/${generateShortenedURL()}`
+  let shortenedURL = `http://localhost:3000/${generateShortenedURL()}`
   const originalURL = req.body.link
-  function generateShortenedURL() { // 如何防止重複?
-    let shortURL = ''
+
+  function generateShortenedURL() {
+    let random = ''
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     for (let i = 0; i < 5; i++) {
       const letterIndex = Math.floor(Math.random() * letters.length)
-      shortURL += letters[letterIndex]
+      random += letters[letterIndex]
     }
-    return shortURL
+    return random
   }
-  return URL.create({ originalURL, shortenedURL })
-    .then(res.redirect('result'))
-    .catch(error => console.log(error))
+
+  // 防止輸入空白的機制
+  if (originalURL === '') {
+    return URL.find()
+      .then(() => res.redirect('/'))
+      .catch(error => console.log(error))
+  }
+
+  // 防止重複的機制
+  if (URL.exists({ shortenedURL })) {
+    shortenedURL = `http://localhost:3000/${generateShortenedURL()}` // reassign + regenerate shortURL
+    return URL.create({ originalURL, shortenedURL })
+      .then(res.redirect('result'))
+      .catch(error => console.log(error))
+  } else {
+    return URL.create({ originalURL, shortenedURL })
+      .then(res.redirect('result'))
+      .catch(error => console.log(error))
+  }
 })
 
 app.listen(PORT, () => {
