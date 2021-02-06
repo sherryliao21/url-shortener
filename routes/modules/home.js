@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const URL = require('../../models/urls')
-const heroku = 'https://blooming-citadel-31304.herokuapp.com/'
-const localhost = 'http://localhost:3000/'
-const baseUrl = process.env.NODE_ENV ? heroku : localhost
+const production = 'https://blooming-citadel-31304.herokuapp.com/'
+const development = 'http://localhost:3000/'
+const baseUrl = process.env.NODE_ENV ? production : development
 
 router.get('/', (req, res) => {
   res.render('index')
