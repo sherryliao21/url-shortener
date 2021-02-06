@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const URL = require('../../models/urls')
-const heroku = 'https://shielded-retreat-36797.herokuapp.com/'
+const heroku = 'https://blooming-citadel-31304.herokuapp.com/'
 const localhost = 'http://localhost:3000/'
 const baseUrl = process.env.NODE_ENV ? heroku : localhost
 
