@@ -1,13 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const URL = require('../../models/urls')
+const heroku = 'https://shielded-retreat-36797.herokuapp.com/'
+const localhost = 'http://localhost:3000/'
+const baseUrl = process.env.NODE_ENV ? heroku : localhost
 
 router.get('/', (req, res) => {
   res.render('index')
 })
 
 router.post('/', (req, res) => {
-  let shortenedURL = 'http://localhost:3000/' + `${generateShortenedURL()}`
+  let shortenedURL = baseUrl + `${generateShortenedURL()}`
   const originalURL = req.body.link
 
   function generateShortenedURL() {
@@ -29,8 +32,8 @@ router.post('/', (req, res) => {
 
   // 防止重複的機制
   if (URL.exists({ shortenedURL })) {
-    shortenedURL = 'http://localhost:3000/' + `${generateShortenedURL()}` // reassign + regenerate shortURL
-    return URL.create({ originalURL, shortenedURL })
+    shortenedURL = baseUrl + `${generateShortenedURL()}` // reassign + regenerate shortURL
+    URL.create({ originalURL, shortenedURL })
       .then(res.redirect('result'))
       .catch(error => console.log(error))
   } else {
