@@ -1,9 +1,14 @@
-<div class="container mt-5" style="width: 500px; outline: 3px orange solid; height: 500px;">
-  <div class="description">
-    <h1>Let's make your link shorter!</h1>
+<div class="container mt-5 d-flex flex-column align-items-center" style="width: 500px; -webkit-box-shadow: 5px 4px 12px -7px rgba(0,0,0,0.78);
+-moz-box-shadow: 5px 4px 12px -7px rgba(0,0,0,0.78);
+box-shadow: 5px 4px 12px -7px rgba(0,0,0,0.78); height: 500px; background-color: #fff; border-radius: 8px;">
+  <div class="description d-flex flex-column justify-content-center align-items-center" style="padding: 40px 0 30px;">
+    <i class="fas fa-link" style="font-size: 200px; color: rgb(63, 104, 104); margin-bottom: 30px;"></i>
+    <h2 style="color: rgb(34, 73, 73)">Let's make your link shorter!</h2>
   </div>
-  <form action="/" method="POST" class="d-flex flex-column justify-content-between form">
+  <form action="/" method="POST" class="form d-flex flex-column justify-content-between align-items-center"
+    style="width: 300px;">
     <input class="form-control input-form" type="text" name="link" placeholder="http://">
-    <button class="btn btn-success submit-button" type="submit">Generate link!</button>
+    <button class="btn submit-button" type="submit"
+      style="margin-top: 25px; background-color: rgb(103, 167, 167); color: #fff">Generate link!</button>
   </form>
 </div>

@@ -1,19 +1,35 @@
-<div class="container">
-  <div>
-    <h1>this is result page</h1>
-    我要有生成後的短網址
-    還有資料庫中的資料作為history可以display
+<div class="container mt-5 d-flex flex-column align-items-center" style="width: 500px; -webkit-box-shadow: 5px 4px 12px -7px rgba(0,0,0,0.78);
+-moz-box-shadow: 5px 4px 12px -7px rgba(0,0,0,0.78);
+box-shadow: 5px 4px 12px -7px rgba(0,0,0,0.78); height: 600px; background-color: #fff; border-radius: 8px;">
+  <div class="description d-flex flex-column justify-content-center align-items-center" style="padding: 40px 0 20px;">
+    <i class="far fa-check-circle" style="font-size: 200px; color: rgb(63, 104, 104); margin-bottom: 30px;"></i>
+    <h2 style="color: rgb(34, 73, 73)">Here is your result!</h2>
   </div>
-  <div class="fresh-result">
-
-    <h1 style="color:red;">原網址：{{ freshResult.originalURL }}</h1>
-    <h2 style="color:red;">新網址：{{ freshResult.shortenedURL }}</h2>
-  </div>
-  <div class="originalURL" style="background-color: sandybrown;">
-    <h1>歷史紀錄：</h1>
-    {{#each history}}
-    <h2>{{ this.originalURL }}</h2>
-    <h2>http://localhost:3000/{{ this.shortenedURL }}</h2>
-    {{/each}}
+  <div class="form d-flex flex-column justify-content-between align-items-center">
+    <div class="input-groups d-flex flex-column justify-content-between" style="width: 300px;">
+      <label style="color: rgb(34, 73, 73); margin-bottom: 5px;">Original URL</label><input
+        class="form-control input-form" type="text" name="link" style="margin-bottom: 10px; color:rgb(181, 184, 184)"
+        value="{{ freshResult.originalURL }}" disabled>
+      <label style="color: rgb(34, 73, 73); margin-bottom: 5px;">Shortened URL</label><input
+        class="form-control input-form" type="text" name="link" value="{{ freshResult.shortenedURL }}"
+        id="shortened-url" style=" color:rgb(100, 102, 102)">
+    </div>
+    <div class="buttons">
+      <button onclick="onCopyBtnClicked()" class="btn"
+        style="margin-top: 25px; background-color: rgb(183, 228, 228); color: rgb(103, 167, 167)">Copy
+        short URL</button>
+      <a href="/"><button class="btn" style="margin-top: 25px; background-color: rgb(103, 167, 167); color: #fff">Try
+          another link</button></a>
+    </div>
   </div>
 </div>
+
+{{!-- 有空再來做history log --}}
+{{!-- <div class="originalURL" style="background-color: sandybrown;">
+  <h1>歷史紀錄：</h1>
+  {{#each history}}
+  <h2>{{ this.originalURL }}</h2>
+  <h2>http://localhost:3000/{{ this.shortenedURL }}</h2>
+  {{/each}}
+</div>
+</div> --}}

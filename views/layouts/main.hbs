@@ -20,9 +20,16 @@
   </nav>
   {{{ body }}}
   <script>
+    const copyText = document.querySelector("#shortened-url")
     const submit = document.querySelector('.submit-button')
     const input = document.querySelector('.input-form')
     const form = document.querySelector('.form')
+    function onCopyBtnClicked() {
+      copyText.select()
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+      alert("Copied: " + copyText.value);
+    }
     form.addEventListener('click', (event) => {
       if (event.target === submit) {
         if (input.value === '') {
@@ -30,6 +37,7 @@
         }
       }
     })
+
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
     integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
