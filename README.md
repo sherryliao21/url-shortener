@@ -29,7 +29,7 @@ cd url-shortener
 ```
 npm install
 ```
-4. Run seeder (Once "check history log" feature is out, at this point no need to run seeder)
+4. Run seeder
 ```
 npm run seed
 ```
