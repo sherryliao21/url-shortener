@@ -60,7 +60,6 @@ router.get('/:shortURL', (req, res) => {
   return URL.find({ shortenedURL: currentShortURL })
     .lean()
     .then(target => {
-      console.log(target)
       res.redirect(target[0].originalURL)
     })
     .catch(error => console.log(error))
