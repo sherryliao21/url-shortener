@@ -9,6 +9,18 @@ router.get('/', (req, res) => {
   res.render('index')
 })
 
+router.get('/result', (req, res) => {
+  return URL.find()
+    .sort({ _id: 'desc' })
+    .lean()
+    .then(history => {
+      const freshResult = history[0]
+      res.render('result', { history, freshResult }) // 歷史紀錄開發中還沒用到
+    })
+    .catch(error => console.log(error))
+})
+
+
 router.post('/', (req, res) => {
   let shortenedURL = baseUrl + `${generateShortenedURL()}`
   const originalURL = req.body.link
@@ -41,6 +53,17 @@ router.post('/', (req, res) => {
       .then(res.redirect('result'))
       .catch(error => console.log(error))
   }
+})
+
+router.get('/:shortURL', (req, res) => {
+  const currentShortURL = baseUrl + req.params.shortURL
+  return URL.find({ shortenedURL: currentShortURL })
+    .lean()
+    .then(target => {
+      console.log(target)
+      res.redirect(target[0].originalURL)
+    })
+    .catch(error => console.log(error))
 })
 
 module.exports = router
